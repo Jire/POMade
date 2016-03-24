@@ -1,12 +1,7 @@
 package org.jire.pomade.pom
 
-import org.jire.pomade.pom.Artifact
-import org.jire.pomade.pom.XMLElement
-import org.jire.pomade.pom.Build
-import org.jire.pomade.pom.Dependency
-
-data class POM(val modelVersion: String = "4.0.0", val artifact: Artifact, val build: Build,
-               val dependencies: Set<Dependency>, val properties: Map<String, String>) : XMLElement {
+data class Project(val modelVersion: String = "4.0.0", val artifact: Artifact, val build: Build,
+                   val dependencies: Set<Dependency>, val properties: Map<String, String>) : XMLElement {
 
 	override fun generate(indent: Int): String {
 		var string = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project " +
