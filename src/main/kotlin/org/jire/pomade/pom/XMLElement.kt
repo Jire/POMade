@@ -1,4 +1,4 @@
-package org.jire.pomade
+package org.jire.pomade.pom
 
 const val INDENT_SPACING = "    "
 

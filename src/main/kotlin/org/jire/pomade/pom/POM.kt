@@ -1,7 +1,9 @@
-package org.jire.pomade
+package org.jire.pomade.pom
 
-import org.jire.pomade.build.Build
-import org.jire.pomade.dependencies.Dependency
+import org.jire.pomade.pom.Artifact
+import org.jire.pomade.pom.XMLElement
+import org.jire.pomade.pom.Build
+import org.jire.pomade.pom.Dependency
 
 data class POM(val modelVersion: String = "4.0.0", val artifact: Artifact, val build: Build,
                val dependencies: Set<Dependency>, val properties: Map<String, String>) : XMLElement {

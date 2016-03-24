@@ -1,7 +1,7 @@
-package org.jire.pomade.dependencies
+package org.jire.pomade.pom
 
-import org.jire.pomade.Artifact
-import org.jire.pomade.XMLElement
+import org.jire.pomade.pom.Artifact
+import org.jire.pomade.pom.XMLElement
 
 data class Dependency(val artifact: Artifact, val scope: String = "compile") : XMLElement {
 

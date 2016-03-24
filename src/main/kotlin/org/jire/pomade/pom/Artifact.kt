@@ -1,4 +1,4 @@
-package org.jire.pomade
+package org.jire.pomade.pom
 
 data class Artifact(val groupId: String, val artifactId: String, val version: String) : XMLElement {
 
