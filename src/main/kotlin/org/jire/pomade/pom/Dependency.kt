@@ -1,8 +1,5 @@
 package org.jire.pomade.pom
 
-import org.jire.pomade.pom.Artifact
-import org.jire.pomade.pom.XMLElement
-
 data class Dependency(val artifact: Artifact, val scope: String = "compile") : XMLElement {
 
 	override fun generate(indent: Int) = "${indent()}<dependency>\n${artifact.generate(indent + 1)}" +
