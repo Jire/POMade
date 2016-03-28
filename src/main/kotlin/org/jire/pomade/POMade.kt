@@ -4,7 +4,6 @@ import org.jire.pomade.pom.*
 import java.nio.file.Files
 import java.nio.file.Paths
 import java.util.*
-import org.jire.pomade.pom.Artifact as POMArtifact
 
 object POMade {
 
@@ -30,7 +29,7 @@ internal val dependencies = HashSet<Dependency>()
 internal val properties = HashMap<String, String>()
 
 private val kotlinExecutions = HashSet<Execution>()
-private val kotlin = object : Plugin(POMArtifact("org.jetbrains.kotlin",
+private val kotlin = object : Plugin(Artifact("org.jetbrains.kotlin",
 		"kotlin-maven-plugin", "\${kotlin.version}"), kotlinExecutions) {
 	init {
 		kotlinExecutions.add(Execution("compile", "compile", setOf("compile"),
@@ -43,12 +42,12 @@ private val kotlin = object : Plugin(POMArtifact("org.jetbrains.kotlin",
 fun pomade(ivg: Artifact, body: POMade.() -> Any) {
 	properties["kotlin.version"] = "1.0.1-1"
 	plugins.add(kotlin)
-	dependencies.add(Dependency(POMArtifact("org.jetbrains.kotlin",
+	dependencies.add(Dependency(Artifact("org.jetbrains.kotlin",
 			"kotlin-stdlib", "\${kotlin.version}")))
 
 	POMade.body()
 
-	val project = Project(artifact = POMArtifact(ivg.group, ivg.id, ivg.version),
-			build = build, dependencies = dependencies, properties = properties)
+	val project = Project(artifact = ivg, build = build,
+			dependencies = dependencies, properties = properties)
 	Files.write(Paths.get("pom.xml"), project.generate().toByteArray())
 }
