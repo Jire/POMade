@@ -7,4 +7,15 @@ This library is licensed under [The MIT License](https://github.com/Jire/POMade/
 
 ---
 
-`POMade` simplifies the build process without introducing complexity. `POMade` uses existing Maven technology but provides you with a simple idiomatic syntax.
+_POMade_ simplifies the build process without introducing complexity. _POMade_ uses existing Maven technology but provides you with a simple idiomatic syntax.
+
+```kotlin
+import org.jire.pomade.*
+
+pomade("Your-Project"["1.0"] from "your.domain") {
+    dependencies {
+        "Some-Project"["1.5.0"] from "some.project.domain"
+        "Another-Project"["1.2.3"] from "another.project.domain"
+    }
+}
+```
