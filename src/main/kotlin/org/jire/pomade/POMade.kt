@@ -7,6 +7,13 @@ import java.util.*
 
 object POMade {
 
+	init {
+		properties["kotlin.version"] = "1.0.1-1"
+		plugins.add(kotlin)
+		dependencies.add(Dependency(Artifact("org.jetbrains.kotlin",
+				"kotlin-stdlib", "\${kotlin.version}")))
+	}
+
 	fun compile(body: Compile.() -> Any) {
 		Compile.body()
 	}
@@ -39,15 +46,15 @@ private val kotlin = object : Plugin(Artifact("org.jetbrains.kotlin",
 	}
 }
 
-fun pomade(ivg: Artifact, body: POMade.() -> Any) {
-	properties["kotlin.version"] = "1.0.1-1"
-	plugins.add(kotlin)
-	dependencies.add(Dependency(Artifact("org.jetbrains.kotlin",
-			"kotlin-stdlib", "\${kotlin.version}")))
-
-	POMade.body()
+fun pomade(ivg: Artifact) {
+	POMade // ensures initialization
 
 	val project = Project(artifact = ivg, build = build,
 			dependencies = dependencies, properties = properties)
 	Files.write(Paths.get("pom.xml"), project.generate().toByteArray())
+}
+
+fun pomade(ivg: Artifact, body: POMade.() -> Any) {
+	POMade.body()
+	pomade(ivg)
 }
