@@ -7,13 +7,6 @@ import java.util.*
 
 object POMade {
 
-	init {
-		properties["kotlin.version"] = "1.0.1-1"
-		plugins.add(kotlin)
-		dependencies.add(Dependency(Artifact("org.jetbrains.kotlin",
-				"kotlin-stdlib", "\${kotlin.version}")))
-	}
-
 	fun compile(body: Compile.() -> Any) {
 		Compile.body()
 	}
@@ -26,16 +19,23 @@ object POMade {
 		properties[this] = value
 	}
 
+	init {
+		properties["kotlin.version"] = "1.0.1-1"
+		plugins.add(kotlin)
+		dependencies.add(Dependency(Artifact("org.jetbrains.kotlin",
+				"kotlin-stdlib", "\${kotlin.version}")))
+	}
+
 }
 
-operator fun String.get(version: String) = ProjectArtifactBuilder(this, version)
+operator fun String.get(version: String) = ProjectArtifactBuilder(this, version) // cv
 
 internal val plugins = HashSet<Plugin>()
 private val build = Build(plugins)
 internal val dependencies = HashSet<Dependency>()
 internal val properties = HashMap<String, String>()
 
-private val kotlinExecutions = HashSet<Execution>()
+private val kotlinExecutions = HashSet<Execution>() // concurrent
 private val kotlin = object : Plugin(Artifact("org.jetbrains.kotlin",
 		"kotlin-maven-plugin", "\${kotlin.version}"), kotlinExecutions) {
 	init {
