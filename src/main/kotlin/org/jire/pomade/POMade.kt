@@ -28,14 +28,14 @@ object POMade {
 
 }
 
-operator fun String.get(version: String) = ProjectArtifactBuilder(this, version) // cv
+operator fun String.get(version: String) = ProjectArtifactBuilder(this, version)
 
 internal val plugins = HashSet<Plugin>()
 private val build = Build(plugins)
 internal val dependencies = HashSet<Dependency>()
 internal val properties = HashMap<String, String>()
 
-private val kotlinExecutions = HashSet<Execution>() // concurrent
+private val kotlinExecutions = HashSet<Execution>()
 private val kotlin = object : Plugin(Artifact("org.jetbrains.kotlin",
 		"kotlin-maven-plugin", "\${kotlin.version}"), kotlinExecutions) {
 	init {
