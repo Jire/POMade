@@ -13,7 +13,7 @@ _POMade_ simplifies the build process without introducing complexity. _POMade_ u
 import org.jire.pomade.*
 
 pomade("Your-Project"["1.0"] from "your.domain") {
-    dependencies {
+    compile {
         "Some-Project"["1.5.0"] from "some.project.domain"
         "Another-Project"["1.2.3"] from "another.project.domain"
     }
