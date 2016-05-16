@@ -20,7 +20,7 @@ object POMade {
 	}
 
 	init {
-		properties["kotlin.version"] = "1.0.1-1"
+		properties["kotlin.version"] = "1.0.2"
 		plugins.add(kotlin)
 		dependencies.add(Dependency(Artifact("org.jetbrains.kotlin",
 				"kotlin-stdlib", "\${kotlin.version}")))
